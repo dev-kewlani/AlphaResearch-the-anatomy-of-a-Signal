@@ -8,3 +8,4 @@ print(df.head())
 print(df.info())
 
 print("I am Kate")
+print("I Love Stats!!!")
