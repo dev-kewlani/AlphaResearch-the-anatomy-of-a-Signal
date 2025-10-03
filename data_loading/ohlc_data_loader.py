@@ -5,13 +5,17 @@ from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # ==========================
 # CONFIG
 # ==========================
-API_KEY = "iZVjFMhpcS1Fo4XI4TpicRVL6EigH9lP"     # <-- put your key here
-OUT_DIR = Path("ohlc_data") # output root folder
-YEARS_BACK = 10                   # last N years (inclusive)
+load_dotenv()
+
+API_KEY = os.getenv("POLYGON_CURRENCIES_API_KEY")
+OUT_DIR = Path("ohlc_data") 
+YEARS_BACK = 10                   
 
 PAIRS = [
     "EURUSD","USDJPY","GBPUSD","AUDUSD","USDCHF","USDCAD","NZDUSD",
@@ -28,7 +32,6 @@ PAIRS = [
 # HELPERS
 # ==========================
 def agg_ticker_fx(p: str) -> str:
-    # v2 aggregates use C:BASEQUOTE (no hyphen)
     return f"C:{p}"
 
 def month_chunks(start_yyyymmdd: str, end_yyyymmdd: str):
